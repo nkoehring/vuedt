@@ -106,16 +106,24 @@ export default {
     },
     selectDay (x,y) {
       const n = this.calendarDay(x,y)
-      const d = new Date(this.year, this.month, n)
+
+      // save the time
+      const hour = this.value.getHours()
+      const minute = this.value.getMinutes()
+      const second = this.value.getSeconds()
+
+      const d = new Date(this.year, this.month, n, hour, minute, second)
 
       this.$emit('input', d)
     }
   },
-  beforeMount () {
-    const now = this.value || new Date()
-    this.year = this.baseYear = now.getFullYear()
-    this.month = this.baseMonth = now.getMonth()
-    this.day = now.getDate()
+  watch: {
+    value (newValue, oldValue) {
+      const now = newValue || new Date()
+      this.year = this.baseYear = now.getFullYear()
+      this.month = this.baseMonth = now.getMonth()
+      this.day = now.getDate()
+    }
   }
 }
 </script>
