@@ -1,10 +1,9 @@
 <template>
-  <div class="vuedt">
-    <input type="datetime" :value="date.toISOString()" disabled="true" />
-    <button @click="active = !active">&#128197;</button>
+  <div class="vuedt" @click="active = !active">
+    <input type="datetime" :value="date.toLocaleString()" disabled="true" />
     <div class="pickers" v-show="active">
-      <date-picker v-model="date" />
-      <time-picker v-model="date" />
+      <date-picker v-model="date" :lang="lang" />
+      <time-picker v-model="date" :lang="lang" />
     </div>
   </div>
 </template>
@@ -16,7 +15,10 @@ import TimePicker from './VuedtClock.vue'
 export default {
   name: 'vuedt',
   components: { DatePicker, TimePicker },
-  props: { value: { type: Date, default: () => new Date() } },
+  props: {
+    lang: { type: String, default: 'en' },
+    value: { type: Date, default () { return new Date() } }
+  },
   data () {
     return {
       active: false,
@@ -30,8 +32,13 @@ export default {
 .vuedt > input {
   width: 200px;
   text-align: center;
+  pointer-events: none;
+}
+.vuedt > input::after {
+  content: '\1f4c5';
 }
 .pickers {
+  display: inline-block;
   position: absolute;
   z-index: 99999;
 }

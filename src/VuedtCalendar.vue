@@ -2,23 +2,23 @@
   <div class="calendar">
 
     <div class="year-selector">
-      <button @click="baseYear = baseYear - 1">‹</button>
+      <button @click.stop="baseYear = baseYear - 1">‹</button>
       <button v-for="y in [baseYear - 1, baseYear, baseYear + 1]"
-        @click="year = y"
+        @click.stop="year = y"
         :class="{ selected: year === y }">
         {{ y }}
       </button>
-      <button @click="baseYear = baseYear + 1">›</button>
+      <button @click.stop="baseYear = baseYear + 1">›</button>
     </div>
     
     <div class="month-selector">
-      <button @click="baseMonth = baseMonth - 1" :disabled="baseMonth < 3">‹</button>
+      <button @click.stop="baseMonth = baseMonth - 1" :disabled="baseMonth < 3">‹</button>
       <button v-for="m in [baseMonth - 2, baseMonth - 1, baseMonth, baseMonth + 1, baseMonth + 2]"
-        @click="month = m"
+        @click.stop="month = m"
         :class="{ selected: month === m }">
         {{ msg.month[m] }}
       </button>
-      <button @click="baseMonth = baseMonth + 1" :disabled="baseMonth > 8 ">›</button>
+      <button @click.stop="baseMonth = baseMonth + 1" :disabled="baseMonth > 8 ">›</button>
     </div>
 
     <div class="day-selector">
@@ -27,7 +27,7 @@
       </header>
       <div class="row" v-for="y in 6">
         <button v-for="x in 7"
-          @click="selectDay(x,y)"
+          @click.stop="selectDay(x,y)"
           :class="{'out-of-month': isLastMonth(x,y) || isNextMonth(x,y)}">
           {{ prettyDay(x,y) }}
         </button>
@@ -51,7 +51,7 @@ const i18n = {
 
 export default {
   name: 'vuedt-calendar',
-  prop: {
+  props: {
     lang: { type: String, default: 'en' },
     value: { type: Date, default () { return new Date() } }
   },
