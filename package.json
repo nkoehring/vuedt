@@ -1,0 +1,48 @@
+{
+  "name": "vuedt",
+  "description": "crazy lightweight Vuejs Date and Time picker component",
+  "version": "0.0.1",
+  "author": "koehr <n@koehr.in>",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "webpack --progress --hide-modules"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nkoehring/vuedt.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nkoehring/vuedt/issues"
+  },
+  "homepage": "https://github.com/nkoehring/vuedt#readme",
+  "keywords": [
+    "vue",
+    "datetime",
+    "date",
+    "time",
+    "calendar",
+    "datepicker",
+    "timepicker"
+  ],
+  "devDependencies": {
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-stage-2": "^6.22.0",
+    "babel-runtime": "^6.23.0",
+    "css-loader": "^0.23.1",
+    "style-loader": "^0.15.0",
+    "vue": "^2.2.4",
+    "vue-html-loader": "^1.2.4",
+    "vue-loader": "^11.1.4",
+    "vue-style-loader": "^2.0.4",
+    "vue-template-compiler": "^2.2.4",
+    "webpack": "^2.2.1"
+  },
+  "browserify": {
+    "transform": [
+      "vueify"
+    ]
+  }
+}
