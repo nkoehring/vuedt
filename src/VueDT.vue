@@ -83,9 +83,7 @@ export default {
 .pickers > .calendar-wrap,
 .pickers > .clock-wrap {
   display: block;
-  width: 252px;
   height: 290px;
-  border: 1px solid #666;
   background: white;
   transition: transform .2s ease-out;
 }

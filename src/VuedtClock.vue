@@ -223,7 +223,7 @@ export default {
   top: 83%;
   left: 0;
   width: 100%;
-  font: normal 0.8em arial;
+  font: normal 0.8em sans-serif;
   color: gray;
   text-align: center;
   text-transform: uppercase;

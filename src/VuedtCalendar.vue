@@ -151,7 +151,7 @@ export default {
 .year-selector > button,
 .month-selector > button,
 .day-selector > .row > button {
-  flex: 1 0;
+  flex: 1 1;
   border: 1px solid #aaa;
   background: #eee;
   background: linear-gradient(#fff, #f9f9f9);
@@ -184,6 +184,7 @@ export default {
   text-align: center;
 }
 .day-selector > .row > button {
+  width: 36px;
   height: 36px;
   box-sizing: border-box;
   border: 3px solid transparent;
