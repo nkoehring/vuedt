@@ -28,7 +28,7 @@
       <div class="row" v-for="y in 6">
         <button v-for="x in 7"
           @click.stop="selectDay(x,y)"
-          :class="{'out-of-month': isLastMonth(x,y) || isNextMonth(x,y)}">
+          :class="{'out-of-month': isLastMonth(x,y) || isNextMonth(x,y), today: isToday(x,y)}">
           {{ prettyDay(x,y) }}
         </button>
       </div>
@@ -84,6 +84,11 @@ export default {
       const n = this.calendarDay(x,y)
       return n > this.lastDay()
     },
+    isToday (x,y) {
+      const n = this.calendarDay(x,y)
+      const today = new Date().getDate()
+      return n === today
+    },
     prettyDay (x,y) {
       const n = this.calendarDay(x,y)
 
@@ -117,6 +122,12 @@ export default {
       this.$emit('input', d)
     }
   },
+  beforeMount () {
+    const now = this.value || new Date()
+    this.year = this.baseYear = now.getFullYear()
+    this.month = this.baseMonth = now.getMonth()
+    this.day = now.getDate()
+  },
   watch: {
     value (newValue, oldValue) {
       const now = newValue || new Date()
@@ -141,7 +152,7 @@ export default {
   flex: 1 0;
   border: 1px solid #aaa;
   background: #eee;
-  background: linear-gradient(#efefef, #e0e0e0);
+  background: linear-gradient(#fff, #f9f9f9);
 }
 .year-selector > button.selected,
 .month-selector > button.selected,
@@ -151,8 +162,7 @@ export default {
   font-weight: bold;
 }
 .year-selector > button:hover,
-.month-selector > button:hover,
-.day-selector > .row > button:hover {
+.month-selector > button:hover {
   background: #ddf;
   cursor: pointer;
 }
@@ -173,8 +183,21 @@ export default {
 }
 .day-selector > .row > button {
   height: 36px;
+  box-sizing: border-box;
+  border: 3px solid transparent;
+}
+.day-selector > .row > button:hover {
+  border-bottom: 3px solid #333;
 }
 .day-selector > .row > button.out-of-month {
   color: #888;
+}
+.day-selector > .row > button.out-of-month:hover {
+  border-bottom: 3px solid #999;
+}
+.day-selector > .row > button.today {
+  color: #06b;
+  font-weight: bold;
+  border-bottom: 3px solid #06b;
 }
 </style>
