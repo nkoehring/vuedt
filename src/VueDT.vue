@@ -1,6 +1,11 @@
 <template>
-  <div class="vuedt" @click="clock = false; active = !active">
-    <input type="datetime" :value="date.toLocaleString()" disabled="true" />
+  <div class="vuedt">
+    <div class="input-wrap" @click="active = true">
+      <input type="datetime" :value="date.toLocaleString()" disabled="true" />
+    </div>
+    <transition name="fade">
+      <div class="fullscreen" @click="active = false" v-if="active" />
+    </transition>
     <div class="pickers" :class="{ clock }" v-show="active">
       <div class="calendar-wrap">
         <date-picker v-model="date" :lang="lang" @input="clock = true" />
@@ -47,19 +52,30 @@ export default {
 .vuedt {
   position: relative;
 }
-.vuedt > input {
+.vuedt > .input-wrap {
+  width: 200px;
+}
+.vuedt > .input-wrap > input {
   width: 200px;
   text-align: center;
   pointer-events: none;
 }
-.vuedt > input::after {
+.vuedt > .input-wrap > input::after {
   content: '\1f4c5';
+}
+.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,.2);
+  z-index: 99998;
 }
 .pickers {
   display: inline-block;
   position: absolute;
   top: 24px;
-  margin-left: -206px;
   z-index: 99999;
   height: 290px;
   overflow: hidden;
@@ -84,4 +100,6 @@ button.prev, button.next {
   font-size: 10px;
   text-spacing: 1px;
 }
+.fade-enter-active, .fade-leave-active { transition: opacity .5s }
+.fade-enter, .fade-leave-to .fade-leave-active { opacity: 0 }
 </style>
