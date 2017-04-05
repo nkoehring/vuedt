@@ -1,7 +1,11 @@
 <template>
   <div class="clock">
     <header>
-      <h1>{{ formattedTime }}</h1>
+      <h1>
+        <span :class="{highlight: mode === 0}" @click.stop="mode = 0">{{ pad(hour) }}</span> :
+        <span :class="{highlight: mode === 1}" @click.stop="mode = 1">{{ pad(minute) }}</span> :
+        <span :class="{highlight: mode === 2}" @click.stop="mode = 2">{{ pad(second) }}</span>
+      </h1>
     </header>
     <div class="outer_face">
       <div :class="`marker ${marker}`" v-for="(marker,i) in markers">
@@ -71,6 +75,7 @@ export default {
     }
   },
   computed: {
+
     formattedTime () {
       const h = this.pad(this.hour)
       const m = this.pad(this.minute)
@@ -114,6 +119,19 @@ export default {
 .clock > header > h1 {
   font-size: 30px;
   margin: .2em;
+  text-align: center;
+  color: #333;
+}
+.clock > header > h1 > span {
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+.clock > header > h1 > span:hover {
+  border-bottom: 2px solid #333;
+}
+.clock > header > h1 > span.highlight {
+  color: #06b;
+  border-bottom: 2px solid #333;
 }
 
 /* http://www.javascriptkit.com/dhtmltutors/css3clock.shtml */
@@ -160,8 +178,8 @@ export default {
   z-index: 3;
   color: white;
   line-height: 1em;
-  transition: opacity .2s;
   text-shadow: 0 0 2px black;
+  text-align: center;
   cursor: pointer;
 }
 .marker > .handle0:hover,
@@ -219,7 +237,7 @@ export default {
   transform-origin: bottom;
   z-index: -1;
   box-shadow: 0 0 4px gray;
-  transition: transform 1s linear;
+  transition: transform .5s linear;
 }
 .hand.hour {
   top: 15%;
