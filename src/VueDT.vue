@@ -2,8 +2,14 @@
   <div class="vuedt" @click="clock = false; active = !active">
     <input type="datetime" :value="date.toLocaleString()" disabled="true" />
     <div class="pickers" :class="{ clock }" v-show="active">
-      <date-picker v-model="date" :lang="lang" @input="clock = true" />
-      <time-picker v-model="date" :lang="lang" />
+      <div class="calendar-wrap">
+        <date-picker v-model="date" :lang="lang" @input="clock = true" />
+        <button class="next" @click.stop="clock = true">switch to clock</button>
+      </div>
+      <div class="clock-wrap">
+        <button class="prev" @click.stop="clock = false">back to calendar</button>
+        <time-picker v-model="date" :lang="lang" />
+      </div>
     </div>
   </div>
 </template>
@@ -22,7 +28,7 @@ export default {
   data () {
     return {
       active: false,
-      mode: 0,
+      clock: false,
       date: 0
     }
   },
@@ -55,20 +61,27 @@ export default {
   top: 24px;
   margin-left: -206px;
   z-index: 99999;
-  height: 276px;
+  height: 290px;
   overflow: hidden;
 }
-.pickers > .calendar,
-.pickers > .clock {
+.pickers > .calendar-wrap,
+.pickers > .clock-wrap {
   display: block;
   width: 252px;
-  height: 276px;
+  height: 290px;
   border: 1px solid #666;
   background: white;
   transition: transform .2s ease-out;
 }
-.pickers.clock > .calendar,
-.pickers.clock > .clock {
+.pickers.clock > .calendar-wrap,
+.pickers.clock > .clock-wrap {
   transform: translateY(-100%);
+}
+button.prev, button.next {
+  display: block;
+  width: 100%;
+  height: 20px;
+  font-size: 10px;
+  text-spacing: 1px;
 }
 </style>
