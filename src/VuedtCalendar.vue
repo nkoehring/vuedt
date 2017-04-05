@@ -86,8 +86,10 @@ export default {
     },
     isToday (x,y) {
       const n = this.calendarDay(x,y)
-      const today = new Date().getDate()
-      return n === today
+      const today = new Date()
+      const thisYear = this.year === today.getFullYear()
+      const thisMonth = this.month === today.getMonth()
+      return thisYear && thisMonth && n === today.getDate()
     },
     prettyDay (x,y) {
       const n = this.calendarDay(x,y)
