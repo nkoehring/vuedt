@@ -28,7 +28,7 @@
       <div class="row" v-for="y in 6">
         <button v-for="x in 7"
           @click.stop="selectDay(x,y)"
-          :class="{'out-of-month': isLastMonth(x,y) || isNextMonth(x,y), today: isToday(x,y)}">
+          :class="cssClasses(x,y)">
           {{ prettyDay(x,y) }}
         </button>
       </div>
@@ -100,6 +100,18 @@ export default {
         return n - this.lastDay()
       } else {
         return n
+      }
+    },
+    cssClasses (x,y) {
+      const n = this.calendarDay(x,y)
+      const thisYear = this.year === this.value.getFullYear()
+      const thisMonth = this.month === this.value.getMonth()
+      const thisDay = n === this.value.getDate()
+
+      return {
+        'out-of-month': this.isLastMonth(x,y) || this.isNextMonth(x,y),
+        today: this.isToday(x,y),
+        selected: thisYear && thisMonth && thisDay
       }
     },
     monthOffset () {

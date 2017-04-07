@@ -1,19 +1,19 @@
 <template>
   <div class="vuedt">
     <div class="input-wrap" @click="active = true">
-      <input type="datetime" :value="date.toLocaleString()" disabled="true" />
+      <input type="datetime" :value="value.toLocaleString()" disabled="true" />
     </div>
     <transition name="fade">
       <div class="fullscreen" @click="active = false" v-if="active" />
     </transition>
     <div class="pickers" :class="{ clock }" v-show="active">
       <div class="calendar-wrap">
-        <date-picker v-model="date" :lang="lang" @input="clock = true" />
+        <date-picker :value="value" :lang="lang" @input="clock = true; $emit('input', $event)" />
         <button class="next" @click.stop="clock = true">switch to clock</button>
       </div>
       <div class="clock-wrap">
         <button class="prev" @click.stop="clock = false">back to calendar</button>
-        <time-picker v-model="date" :lang="lang" />
+        <time-picker :value="value" :lang="lang" @input="$emit('input', $event)" />
       </div>
     </div>
   </div>
@@ -28,23 +28,18 @@ export default {
   components: { DatePicker, TimePicker },
   props: {
     lang: { type: String, default: 'en' },
-    value: { type: Date, default () { return new Date() } }
-  },
-  data () {
-    return {
-      active: false,
-      clock: false,
-      date: 0
+    value: {
+      type: Date,
+      default () {
+        const today = new Date()
+        today.setDate(now.getDate() + 1)
+        today.setHours(12, 0, 0, 0)
+        return today
+      }
     }
   },
-  beforeMount () {
-    const now = new Date()
-    now.setDate(now.getDate() + 1)
-    now.setHours(12)
-    now.setMinutes(0)
-    now.setSeconds(0)
-
-    this.date = now
+  data () {
+    return { active: false, clock: false }
   }
 }
 </script>

@@ -66,9 +66,7 @@ export default {
 
       // save the date
       const d = new Date(this.value)
-      d.setHours(this.hour)
-      d.setMinutes(this.minute)
-      d.setSeconds(this.second)
+      d.setHours(this.hour, this.minute, this.second, 0)
 
       this.$emit('input', d)
     },
