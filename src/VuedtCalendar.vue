@@ -115,11 +115,10 @@ export default {
       const n = this.calendarDay(x,y)
 
       // save the time
-      const hour = this.value.getHours()
-      const minute = this.value.getMinutes()
-      const second = this.value.getSeconds()
-
-      const d = new Date(this.year, this.month, n, hour, minute, second)
+      const d = new Date(this.value)
+      d.setFullYear(this.year)
+      d.setMonth(this.month)
+      d.setDate(n)
 
       this.$emit('input', d)
     }

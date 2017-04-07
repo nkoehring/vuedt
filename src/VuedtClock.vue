@@ -65,17 +65,23 @@ export default {
       this.mode = (this.mode + 1) % modes.length
 
       // save the date
-      const year = this.value.getFullYear()
-      const month = this.value.getMonth()
-      const day = this.value.getDate()
-
-      const d = new Date(year, month, day, this.hour, this.minute, this.second)
+      const d = new Date(this.value)
+      d.setHours(this.hour)
+      d.setMinutes(this.minute)
+      d.setSeconds(this.second)
 
       this.$emit('input', d)
-    }
+    },
+    setHandles (h, m, s) {
+      const hourInDeg =   h / 12 * 360
+      const minuteInDeg = m / 60 * 360
+      const secondInDeg = s / 60 * 360
+
+      this.$refs.hour.style.transform = `rotate(${hourInDeg}deg)`
+      this.$refs.minute.style.transform = `rotate(${minuteInDeg}deg)`
+      this.$refs.second.style.transform = `rotate(${secondInDeg}deg)`}
   },
   computed: {
-
     formattedTime () {
       const h = this.pad(this.hour)
       const m = this.pad(this.minute)
@@ -91,22 +97,8 @@ export default {
       this.minute = now.getMinutes()
       this.second = now.getSeconds()
 
-      const hourEl = this.$refs.hour
-      const minuteEl = this.$refs.minute
-      const secondEl = this.$refs.second
-
-      const hourInDeg = this.hour / 12 * 360
-      const minuteInDeg = this.minute / 60 * 360
-      const secondInDeg = this.second / 60 * 360
-      hourEl.style.transform = 'rotate(0deg)'
-      minuteEl.style.transform = 'rotate(0deg)'
-      secondEl.style.transform = 'rotate(0deg)'
-
-      this.$nextTick(() => {
-        hourEl.style.transform = `rotate(${hourInDeg}deg)`
-        minuteEl.style.transform = `rotate(${minuteInDeg}deg)`
-        secondEl.style.transform = `rotate(${secondInDeg}deg)`
-      })
+      this.setHandles(0, 0, 0)
+      this.$nextTick(() => this.setHandles(this.hour, this.minute, this.second))
     }
   }
 }

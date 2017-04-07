@@ -39,11 +39,12 @@ export default {
   },
   beforeMount () {
     const now = new Date()
-    const year = this.value.getFullYear()
-    const month = this.value.getMonth()
-    const day = this.value.getDate()
+    now.setDate(now.getDate() + 1)
+    now.setHours(12)
+    now.setMinutes(0)
+    now.setSeconds(0)
 
-    this.date = new Date(year, month, day, 12, 0, 0)
+    this.date = now
   }
 }
 </script>
