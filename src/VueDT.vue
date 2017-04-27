@@ -32,7 +32,7 @@ export default {
       type: Date,
       default () {
         const today = new Date()
-        today.setDate(now.getDate() + 1)
+        today.setDate(today.getDate() + 1)
         today.setHours(12, 0, 0, 0)
         return today
       }
