@@ -1,7 +1,7 @@
 {
   "name": "vuedt",
   "description": "crazy lightweight Vuejs Date and Time picker component",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "author": "koehr <n@koehr.in>",
   "main": "./dist/index.js",
   "scripts": {

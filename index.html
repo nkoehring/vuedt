@@ -141,15 +141,14 @@
           <h2 id="demo">Demo!</h2>
 
           <div id="demo-app">
-            Pick a date: <date-time-picker />
+            Pick a date: <date-time-picker v-model='date'></date-time-picker>
           </div>
 
           <script>
           var app = new Vue({
             el: '#demo-app',
             components: { dateTimePicker: vuedt.default },
-            data: {
-            }
+            data: { date: new Date() }
           })
           </script>
 

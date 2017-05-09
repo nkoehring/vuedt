@@ -14,10 +14,10 @@
       </div>
 
       <div class="inner_face">
-        <div class="am-pm">
+        <div class="am-pm" @click.stop="ampm()">
           <div class="wrap" :class="{ pm }">
             <div class="label">AM</div>
-            <div class="slider" @click.stop="ampm()"></div>
+            <div class="slider"></div>
             <div class="label">PM</div>
           </div>
         </div>
@@ -60,6 +60,7 @@ export default {
       this.pm = !this.pm
       if (this.pm) this.hour += 12
       else this.hour -= 12
+      this.emitValue()
     },
     pad (n) {
       return `0${n}`.slice(-2)
@@ -73,24 +74,24 @@ export default {
         return second ? (i+6) * 5 : i * 5
       }
     },
-    setValue (n) {
-      // sets this.(hour|minute|second) to value
-      this[modes[this.mode]] = n
-      this.mode = (this.mode + 1) % modes.length
-
-      this.setHandles(this.hour, this.minute, this.second)
-
+    emitValue () {
       // save the date
       const d = new Date(this.value)
       d.setHours(this.hour, this.minute, this.second, 0)
-
       this.$emit('input', d)
+    },
+    setValue (n) {
+      if (this.pm && this.mode === 0) n += 12  // handle PM
+      this[modes[this.mode]] = n     // sets this.(hour|minute|second) to value
+      this.mode = (this.mode + 1) % modes.length
+      this.setHandles(this.hour, this.minute, this.second)
+      this.emitValue()
     },
     setHandles (h, m, s) {
       h = h !== undefined ? h : this.value.getHours()
       m = m !== undefined ? m : this.value.getMinutes()
       s = s !== undefined ? s : this.value.getSeconds()
-      const hourInDeg =   h / 12 * 360
+      const hourInDeg = (h % 12) / 12 * 360
       const minuteInDeg = m / 60 * 360
       const secondInDeg = s / 60 * 360
 
