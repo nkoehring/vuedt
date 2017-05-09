@@ -5,6 +5,7 @@
   "author": "koehr <n@koehr.in>",
   "main": "./dist/index.js",
   "scripts": {
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "webpack --progress --hide-modules"
   },
   "repository": {
@@ -36,7 +37,9 @@
     "vue-loader": "^12.0.3",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.2.4",
-    "webpack": "^2.2.1"
+    "cross-env": "^3.0.0",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.2.1"
   },
   "browserify": {
     "transform": [

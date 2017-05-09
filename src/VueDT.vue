@@ -8,12 +8,12 @@
     </transition>
     <div class="pickers" :class="{ clock }" v-show="active">
       <div class="calendar-wrap">
-        <date-picker :value="value" :lang="lang" @input="clock = true; $emit('input', $event)" />
-        <button class="next" @click.stop="clock = true">switch to clock</button>
+        <date-picker :value="value" :lang="lang" @input="showClock(); $emit('input', $event)" />
+        <button class="next" @click.stop="showClock()">switch to clock</button>
       </div>
       <div class="clock-wrap">
-        <button class="prev" @click.stop="clock = false">back to calendar</button>
-        <time-picker :value="value" :lang="lang" @input="$emit('input', $event)" />
+        <button class="prev" @click.stop="hideClock()">back to calendar</button>
+        <time-picker ref="clockEl" :value="value" :lang="lang" @input="$emit('input', $event)" />
       </div>
     </div>
   </div>
@@ -30,16 +30,20 @@ export default {
     lang: { type: String, default: 'en' },
     value: {
       type: Date,
-      default () {
-        const today = new Date()
-        today.setDate(today.getDate() + 1)
-        today.setHours(12, 0, 0, 0)
-        return today
-      }
+      required: true
     }
   },
   data () {
     return { active: false, clock: false }
+  },
+  methods: {
+    showClock () {
+      this.clock = true
+      this.$refs.clockEl.setHandles()
+    },
+    hideClock () {
+      this.clock = false
+    }
   }
 }
 </script>
@@ -92,7 +96,10 @@ button.prev, button.next {
   width: 100%;
   height: 20px;
   font-size: 10px;
-  text-spacing: 1px;
+  letter-spacing: 1px;
+}
+button.next {
+  margin-top: 2px;
 }
 .fade-enter-active, .fade-leave-active { transition: opacity .5s }
 .fade-enter, .fade-leave-to .fade-leave-active { opacity: 0 }

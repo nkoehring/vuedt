@@ -61,8 +61,11 @@ export default {
       }
     },
     setValue (n) {
+      // sets this.(hour|minute|second) to value
       this[modes[this.mode]] = n
       this.mode = (this.mode + 1) % modes.length
+
+      this.setHandles(this.hour, this.minute, this.second)
 
       // save the date
       const d = new Date(this.value)
@@ -71,13 +74,17 @@ export default {
       this.$emit('input', d)
     },
     setHandles (h, m, s) {
+      h = h !== undefined ? h : this.value.getHours()
+      m = m !== undefined ? m : this.value.getMinutes()
+      s = s !== undefined ? s : this.value.getSeconds()
       const hourInDeg =   h / 12 * 360
       const minuteInDeg = m / 60 * 360
       const secondInDeg = s / 60 * 360
 
       this.$refs.hour.style.transform = `rotate(${hourInDeg}deg)`
       this.$refs.minute.style.transform = `rotate(${minuteInDeg}deg)`
-      this.$refs.second.style.transform = `rotate(${secondInDeg}deg)`}
+      this.$refs.second.style.transform = `rotate(${secondInDeg}deg)`
+    }
   },
   computed: {
     formattedTime () {
@@ -88,16 +95,10 @@ export default {
       return `${h}:${m}:${s}`
     }
   },
-  watch: {
-    value (newValue, oldValue) {
-      const now = newValue || new Date()
-      this.hour = now.getHours()
-      this.minute = now.getMinutes()
-      this.second = now.getSeconds()
-
-      this.setHandles(0, 0, 0)
-      this.$nextTick(() => this.setHandles(this.hour, this.minute, this.second))
-    }
+  beforeMount () {
+    this.hour = this.value.getHours()
+    this.minute = this.value.getMinutes()
+    this.second = this.value.getSeconds()
   }
 }
 </script>
@@ -105,6 +106,10 @@ export default {
 <style scoped>
 .clock {
   background: white;
+}
+.clock > header {
+  margin: 0;
+  padding: 0;
 }
 .clock > header > h1 {
   font-size: 30px;

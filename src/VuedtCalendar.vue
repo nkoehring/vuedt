@@ -188,6 +188,9 @@ export default {
 .day-selector > header {
   display: flex;
   justify-content: space-around;
+  margin: 0;
+  padding: 0;
+  background: whitesmoke;
 }
 .day-selector > header > .day {
   flex: 0 0 36px;
@@ -196,7 +199,7 @@ export default {
 }
 .day-selector > .row > button {
   width: 36px;
-  height: 36px;
+  height: 34px;
   box-sizing: border-box;
   border: 3px solid transparent;
 }
