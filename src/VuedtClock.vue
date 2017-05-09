@@ -14,6 +14,13 @@
       </div>
 
       <div class="inner_face">
+        <div class="am-pm">
+          <div class="wrap" :class="{ pm }">
+            <div class="label">AM</div>
+            <div class="slider" @click.stop="ampm()"></div>
+            <div class="label">PM</div>
+          </div>
+        </div>
         <div ref="hour" class="hand hour"></div>
         <div ref="minute" class="hand minute"></div>
         <div ref="second" class="hand second"></div>
@@ -44,10 +51,16 @@ export default {
       baseMonth: 0,
       hour: 0,
       minute: 0,
-      second: 0
+      second: 0,
+      pm: false
     }
   },
   methods: {
+    ampm () {
+      this.pm = !this.pm
+      if (this.pm) this.hour += 12
+      else this.hour -= 12
+    },
     pad (n) {
       return `0${n}`.slice(-2)
     },
@@ -99,6 +112,7 @@ export default {
     this.hour = this.value.getHours()
     this.minute = this.value.getMinutes()
     this.second = this.value.getSeconds()
+    this.pm = this.hour > 11
   }
 }
 </script>
@@ -212,18 +226,6 @@ export default {
   border-radius: 50%;
   box-shadow: 0 0 15px gray;
 }
-.inner_face::after {
-  content: "vuedt";
-  position: absolute;
-  top: 83%;
-  left: 0;
-  width: 100%;
-  font: normal 0.8em sans-serif;
-  color: gray;
-  text-align: center;
-  text-transform: uppercase;
-}
-
 .hand {
   position: absolute;
   background: black;
@@ -240,6 +242,7 @@ export default {
   height: 35%;
   margin-left: -2%;
   transform: rotate(15deg);
+  z-index: 2;
 }
 .hand.minute {
   top: 5%;
@@ -247,6 +250,7 @@ export default {
   height: 45%;
   margin-left: -2%;
   transform: rotate(45deg);
+  z-index: 3;
 }
 .hand.second {
   width: 1%;
@@ -254,5 +258,40 @@ export default {
   margin-left: -1%;
   background: red;
   transform: rotate(0deg);
+  z-index: 4;
+}
+.am-pm {
+  position: absolute;
+  top: 76%;
+  left: 30%;
+  width: 40%;
+  height: 1.2em;
+  font: normal 0.8em sans-serif;
+  color: gray;
+  background-color: #F5F5F5;
+  border: 1px solid #CCC inset;
+  text-align: center;
+  text-transform: uppercase;
+  z-index: 1;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.am-pm > .wrap {
+  display: flex;
+  justify-content: left;
+  align-items: stretch;
+  transition: transform .2s ease;
+}
+.am-pm > .wrap.pm {
+  transform: translateX(-50%);
+}
+.am-pm .label {
+  flex: 0 0 45%;
+  line-height: 1.4em;
+}
+.am-pm .slider {
+  flex: 0 0 55%;
+  background: white;
+  border: 1px solid #EEE;
 }
 </style>
