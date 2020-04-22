@@ -44,6 +44,7 @@ export default {
   name: 'vuedt',
   components: { DatePicker, TimePicker },
   props: {
+    placeholder: String,
     locale: { type: String, default: 'en-US' },
     localeOptions: {
       type: Object,
@@ -62,13 +63,15 @@ export default {
     }
   },
   data () {
-    return { active: false, clock: false }
+    return { active: false, clock: false, showPlaceholder: !!this.placeholder }
   },
   computed: {
     lang () {
       return this.locale.split('-')[0]
     },
     localizedValue () {
+      if (this.showPlaceholder) return this.placeholder
+
       const locale = this.locale
       const options = { ...this.localeOptions }
 
@@ -88,6 +91,8 @@ export default {
   },
   methods: {
     selectDate (event) {
+      this.showPlaceholder = false
+
       this.$emit('input', event)
       if (this.time) this.showClock()
       else this.active = false

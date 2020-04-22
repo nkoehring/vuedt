@@ -5,6 +5,8 @@
     <strong>KR</strong> <vue-d-t v-model="date3" locale="ko-KR" />
     <hr />
     <strong>No Clock</strong> <vue-d-t v-model="date4" :time="false" locale="de-DE" />
+    <hr />
+    <strong>No Date</strong> <vue-d-t v-model="date5" placeholder="select date" :time="false" locale="de-DE" />
   </div>
 </template>
 
@@ -18,7 +20,8 @@ export default {
       date1: new Date(),
       date2: new Date(),
       date3: new Date(),
-      date4: new Date()
+      date4: new Date(),
+      date5: new Date()
     }
   }
 }

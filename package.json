@@ -1,6 +1,6 @@
 {
   "name": "vuedt",
-  "version": "0.3.0",
+  "version": "0.3.5",
   "description": "crazy lightweight Vuejs Date and Time picker component with eyecandy",
   "author": "koehr <n@koehr.in>",
   "main": "./dist/vuedt.umd.js",
@@ -27,11 +27,9 @@
     "build": "vue-cli-service build --target lib --formats umd,umd-min --name vuedt src/VueDT.vue",
     "lint": "vue-cli-service lint"
   },
-  "dependencies": {
-    "core-js": "^3.6.4",
-    "vue": "^2.6.11"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "vue": "^2.6.11",
     "@vue/cli-plugin-babel": "~4.3.0",
     "@vue/cli-plugin-eslint": "~4.3.0",
     "@vue/cli-service": "~4.3.0",
