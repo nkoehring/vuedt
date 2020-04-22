@@ -1,5 +1,11 @@
 <template>
-  <vue-d-t v-model="date" :time="false" lang="de" />
+  <div>
+    <strong>GB</strong> <vue-d-t v-model="date1" locale="en-GB" />
+    <strong>DE</strong> <vue-d-t v-model="date2" locale="de-DE" />
+    <strong>KR</strong> <vue-d-t v-model="date3" locale="ko-KR" />
+    <hr />
+    <strong>No Clock</strong> <vue-d-t v-model="date4" :time="false" locale="de-DE" />
+  </div>
 </template>
 
 <script>
@@ -9,8 +15,18 @@ export default {
   components: { VueDT },
   data () {
     return {
-      date: new Date()
+      date1: new Date(),
+      date2: new Date(),
+      date3: new Date(),
+      date4: new Date()
     }
   }
 }
 </script>
+
+<style>
+.vuedt {
+  display: inline-block;
+  margin-right: 1em;
+}
+</style>
