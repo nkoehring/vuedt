@@ -3,12 +3,10 @@ VueDT
 
 Crazy lightweight Vuejs Date and Time picker component, only 5kb minified and gzipped.
 
-Early Alpha!
+This project is still in beta!
 ------------
 
-Early alpha status. Not for production use.
-
-Feel free to play around with it. Feature and pull requests are welcome!
+Please help making it stable by testing and submitting issues and pull requests.
 
 Screenshots
 -----------
