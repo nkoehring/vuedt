@@ -1,10 +1,30 @@
 {
   "name": "vuedt",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.3.0",
+  "description": "crazy lightweight Vuejs Date and Time picker component with eyecandy",
+  "author": "koehr <n@koehr.in>",
+  "main": "./dist/vuedt.umd.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nkoehring/vuedt.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nkoehring/vuedt/issues"
+  },
+  "homepage": "https://nkoehring.github.io/vuedt",
+  "keywords": [
+    "vue",
+    "datetime",
+    "date",
+    "time",
+    "calendar",
+    "datepicker",
+    "timepicker",
+    "eyecandy"
+  ],
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --target lib --name vuedt src/VueDT.vue",
+    "build": "vue-cli-service build --target lib --formats umd,umd-min --name vuedt src/VueDT.vue",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

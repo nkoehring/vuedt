@@ -1,7 +1,7 @@
 VueDT
 =====
 
-Crazy lightweight Vuejs Date and Time picker component, only 5kb minified and gzipped.
+Super lightweight Vuejs Date and Time picker component.
 
 This project is still in beta!
 ------------
