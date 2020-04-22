@@ -3,17 +3,17 @@
 
     <div class="year-selector">
       <button @click.stop="baseYear = baseYear - 1">‹</button>
-      <button v-for="y in [baseYear - 1, baseYear, baseYear + 1]"
+      <button :key="y" v-for="y in [baseYear - 1, baseYear, baseYear + 1]"
         @click.stop="year = y"
         :class="{ selected: year === y }">
         {{ y }}
       </button>
       <button @click.stop="baseYear = baseYear + 1">›</button>
     </div>
-    
+
     <div class="month-selector">
       <button @click.stop="baseMonth = baseMonth - 1" :disabled="baseMonth < 3">‹</button>
-      <button v-for="m in [baseMonth - 2, baseMonth - 1, baseMonth, baseMonth + 1, baseMonth + 2]"
+      <button :key="m" v-for="m in [baseMonth - 2, baseMonth - 1, baseMonth, baseMonth + 1, baseMonth + 2]"
         @click.stop="month = m"
         :class="{ selected: month === m }">
         {{ msg.month[m] }}
@@ -23,13 +23,13 @@
 
     <div class="day-selector">
       <header>
-        <div class="day" v-for="d in msg.day">{{ d }}</div>
+        <div :key="d" class="day" v-for="d in msg.day">{{ d }}</div>
       </header>
-      <div class="row" v-for="y in 6">
-        <button v-for="x in 7"
-          @click.stop="selectDay(x,y)"
-          :class="cssClasses(x,y)">
-          {{ prettyDay(x,y) }}
+      <div :key="y" class="row" v-for="y in 6">
+        <button :key="x" v-for="x in 7"
+          @click.stop="selectDay(x, y)"
+          :class="cssClasses(x, y)">
+          {{ prettyDay(x, y) }}
         </button>
       </div>
     </div>
@@ -70,47 +70,47 @@ export default {
     }
   },
   methods: {
-    calendarDay (x,y) {
+    calendarDay (x, y) {
       const offset = this.monthOffset()
-      const n = ((y-1)*7) + x - this.monthOffset()
+      const n = ((y - 1) * 7) + x - offset
 
       return n
     },
-    isLastMonth (x,y) {
-      const n = this.calendarDay(x,y)
+    isLastMonth (x, y) {
+      const n = this.calendarDay(x, y)
       return n <= 0
     },
-    isNextMonth (x,y) {
-      const n = this.calendarDay(x,y)
+    isNextMonth (x, y) {
+      const n = this.calendarDay(x, y)
       return n > this.lastDay()
     },
-    isToday (x,y) {
-      const n = this.calendarDay(x,y)
+    isToday (x, y) {
+      const n = this.calendarDay(x, y)
       const today = new Date()
       const thisYear = this.year === today.getFullYear()
       const thisMonth = this.month === today.getMonth()
       return thisYear && thisMonth && n === today.getDate()
     },
-    prettyDay (x,y) {
-      const n = this.calendarDay(x,y)
+    prettyDay (x, y) {
+      const n = this.calendarDay(x, y)
 
-      if (this.isLastMonth(x,y)) {
+      if (this.isLastMonth(x, y)) {
         return this.lastDayBefore() + n
-      } else if (this.isNextMonth(x,y)) {
+      } else if (this.isNextMonth(x, y)) {
         return n - this.lastDay()
       } else {
         return n
       }
     },
-    cssClasses (x,y) {
-      const n = this.calendarDay(x,y)
+    cssClasses (x, y) {
+      const n = this.calendarDay(x, y)
       const thisYear = this.year === this.value.getFullYear()
       const thisMonth = this.month === this.value.getMonth()
       const thisDay = n === this.value.getDate()
 
       return {
-        'out-of-month': this.isLastMonth(x,y) || this.isNextMonth(x,y),
-        today: this.isToday(x,y),
+        'out-of-month': this.isLastMonth(x, y) || this.isNextMonth(x, y),
+        today: this.isToday(x, y),
         selected: thisYear && thisMonth && thisDay
       }
     },
@@ -123,8 +123,8 @@ export default {
     lastDay () {
       return new Date(this.year, this.month + 1, 0).getDate()
     },
-    selectDay (x,y) {
-      const n = this.calendarDay(x,y)
+    selectDay (x, y) {
+      const n = this.calendarDay(x, y)
 
       // save the time
       const d = new Date(this.value)
@@ -142,7 +142,7 @@ export default {
     this.day = now.getDate()
   },
   watch: {
-    value (newValue, oldValue) {
+    value (newValue) {
       const now = newValue || new Date()
       this.year = this.baseYear = now.getFullYear()
       this.month = this.baseMonth = now.getMonth()

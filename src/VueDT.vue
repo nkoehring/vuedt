@@ -8,10 +8,10 @@
     </transition>
     <div class="pickers" :class="{ clock }" v-show="active">
       <div class="calendar-wrap">
-        <date-picker :value="value" :lang="lang" @input="showClock(); $emit('input', $event)" />
-        <button class="next" @click.stop="showClock()">switch to clock</button>
+        <date-picker :value="value" :lang="lang" @input="selectDate" />
+        <button class="next" @click.stop="showClock()" v-if="time">switch to clock</button>
       </div>
-      <div class="clock-wrap">
+      <div class="clock-wrap" v-if="time">
         <button class="prev" @click.stop="hideClock()">back to calendar</button>
         <time-picker ref="clockEl" :value="value" :lang="lang" @input="$emit('input', $event)" />
       </div>
@@ -28,6 +28,10 @@ export default {
   components: { DatePicker, TimePicker },
   props: {
     lang: { type: String, default: 'en' },
+    time: {
+      type: Boolean,
+      default: true
+    },
     value: {
       type: Date,
       required: true
@@ -37,6 +41,10 @@ export default {
     return { active: false, clock: false }
   },
   methods: {
+    selectDate (event) {
+      this.$emit('input', event)
+      if (this.time) this.showClock()
+    },
     showClock () {
       this.clock = true
       this.$refs.clockEl.setHandles()

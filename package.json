@@ -1,52 +1,51 @@
 {
   "name": "vuedt",
-  "description": "crazy lightweight Vuejs Date and Time picker component",
-  "version": "0.2.0",
-  "author": "koehr <n@koehr.in>",
-  "main": "./dist/index.js",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
-    "build": "webpack --progress --hide-modules"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nkoehring/vuedt.git"
-  },
-  "bugs": {
-    "url": "https://github.com/nkoehring/vuedt/issues"
-  },
-  "homepage": "https://github.com/nkoehring/vuedt#readme",
-  "keywords": [
-    "vue",
-    "datetime",
-    "date",
-    "time",
-    "calendar",
-    "datepicker",
-    "timepicker"
-  ],
-  "devDependencies": {
-    "babel-core": "^6.24.0",
-    "babel-loader": "^7.0.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-runtime": "^6.23.0",
-    "cross-env": "^3.0.0",
-    "css-loader": "^0.28.0",
-    "style-loader": "^0.17.0",
-    "vue": "^2.2.4",
-    "vue-html-loader": "^1.2.4",
-    "vue-loader": "^12.0.3",
-    "vue-style-loader": "^3.0.1",
-    "vue-template-compiler": "^2.2.4",
-    "webpack": "^2.2.1",
-    "webpack-dev-server": "^2.2.1"
-  },
-  "browserify": {
-    "transform": [
-      "vueify"
-    ]
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build --target lib --name vuedt src/VueDT.vue",
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "babel-preset-latest": "^6.24.0"
-  }
+    "core-js": "^3.6.4",
+    "vue": "^2.6.11"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.3.0",
+    "@vue/cli-plugin-eslint": "~4.3.0",
+    "@vue/cli-service": "~4.3.0",
+    "@vue/eslint-config-standard": "^5.1.2",
+    "eslint": "^6.7.2",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "eslint-plugin-vue": "^6.2.2",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "@vue/standard"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 2020
+    },
+    "rules": {}
+  },
+  "vue": {
+    "css": {
+      "extract": false
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
 }

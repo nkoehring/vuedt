@@ -8,9 +8,9 @@
       </h1>
     </header>
     <div class="outer_face">
-      <div :class="`marker ${marker}`" v-for="(marker,i) in markers">
-        <span class="handle0" @click.stop="setValue(handleValue(i))">{{ handleValue(i) }}</span/>
-        <span class="handle1" @click.stop="setValue(handleValue(i, true))">{{ handleValue(i, true) }}</span/>
+      <div :key="marker" :class="`marker ${marker}`" v-for="(marker,i) in markers">
+        <span class="handle0" @click.stop="setValue(handleValue(i))">{{ handleValue(i) }}</span>
+        <span class="handle1" @click.stop="setValue(handleValue(i, true))">{{ handleValue(i, true) }}</span>
       </div>
 
       <div class="inner_face">
@@ -35,7 +35,7 @@ const markers = [
   'threenine', 'fourten', 'fiveeleven'
 ]
 
-const modes = [ 'hour', 'minute', 'second' ]
+const modes = ['hour', 'minute', 'second']
 
 export default {
   name: 'vuedt-clock',
@@ -65,13 +65,13 @@ export default {
     pad (n) {
       return `0${n}`.slice(-2)
     },
-    handleValue (i, second=false) {
+    handleValue (i, second = false) {
       const isHours = this.mode === 0
 
       if (isHours) {
         return second ? i + 6 : i
       } else {
-        return second ? (i+6) * 5 : i * 5
+        return second ? (i + 6) * 5 : i * 5
       }
     },
     emitValue () {
@@ -81,8 +81,8 @@ export default {
       this.$emit('input', d)
     },
     setValue (n) {
-      if (this.pm && this.mode === 0) n += 12  // handle PM
-      this[modes[this.mode]] = n     // sets this.(hour|minute|second) to value
+      if (this.pm && this.mode === 0) n += 12 // handle PM
+      this[modes[this.mode]] = n // sets this.(hour|minute|second) to value
       this.mode = (this.mode + 1) % modes.length
       this.setHandles(this.hour, this.minute, this.second)
       this.emitValue()
