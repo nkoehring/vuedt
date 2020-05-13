@@ -3,7 +3,9 @@
   "version": "0.3.6",
   "description": "crazy lightweight Vuejs Date and Time picker component with eyecandy",
   "author": "koehr <n@koehr.in>",
-  "main": "./dist/vuedt.umd.js",
+  "main": "dist/vuedt.umd.js",
+  "module": "dist/vuedt.esm.js",
+  "browser": "dist/vuedt.umd.min.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nkoehring/vuedt.git"
@@ -23,43 +25,28 @@
     "eyecandy"
   ],
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --target lib --formats umd,umd-min --name vuedt src/VueDT.vue",
-    "lint": "vue-cli-service lint"
+    "dev": "rollup -c rollup.config.dev.js -w & serve sample",
+    "build": "rollup -c"
   },
-  "dependencies": {},
+  "dependencies": {
+    "core-js": "^3.6.5"
+  },
   "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "cssnano-preset-advanced": "^4.0.7",
+    "rollup": "^2.9.1",
+    "rollup-plugin-analyzer": "^3.2.2",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-filesize": "^9.0.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-postcss": "^3.1.1",
+    "rollup-plugin-serve": "^1.0.1",
+    "rollup-plugin-terser": "^5.3.0",
+    "rollup-plugin-vue": "^5.1.7",
+    "serve": "^11.3.0",
     "vue": "^2.6.11",
-    "@vue/cli-plugin-babel": "~4.3.0",
-    "@vue/cli-plugin-eslint": "~4.3.0",
-    "@vue/cli-service": "~4.3.0",
-    "@vue/eslint-config-standard": "^5.1.2",
-    "eslint": "^6.7.2",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.0",
-    "eslint-plugin-vue": "^6.2.2",
     "vue-template-compiler": "^2.6.11"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "@vue/standard"
-    ],
-    "parserOptions": {
-      "ecmaVersion": 2020
-    },
-    "rules": {}
-  },
-  "vue": {
-    "css": {
-      "extract": true
-    }
   },
   "browserslist": [
     "> 1%",
