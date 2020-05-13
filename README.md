@@ -1,7 +1,7 @@
 VueDT
 =====
 
-Super lightweight Vuejs Date and Time picker component with i18n support.
+Super lightweight Vuejs Date and Time picker component with i18n support. Only 3.3kb minified and gzipped!
 
 Screenshots
 -----------

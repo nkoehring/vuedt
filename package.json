@@ -1,6 +1,6 @@
 {
   "name": "vuedt",
-  "version": "0.3.6",
+  "version": "0.3.9",
   "description": "crazy lightweight Vuejs Date and Time picker component with eyecandy",
   "author": "koehr <n@koehr.in>",
   "main": "dist/vuedt.umd.js",
