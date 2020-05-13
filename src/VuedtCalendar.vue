@@ -152,7 +152,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .year-selector,
 .month-selector,
 .day-selector > .row {
