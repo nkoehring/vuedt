@@ -1,0 +1,9 @@
+webpack (vue-cli)
+ 5.3K vuedt.css         1.5K vuedt.css.gz
+ 116K vuedt.umd.js       26K vuedt.umd.js.gz
+  38K vuedt.umd.min.js   14K vuedt.umd.min.js.gz
+
+rollup
+ 5.7K vuedt.css         1.6K vuedt.css.gz
+  27K vuedt.umd.js      5.2K vuedt.umd.js.gz
+  11K vuedt.umd.min.js  3.3K vuedt.umd.min.js.gz

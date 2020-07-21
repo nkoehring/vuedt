@@ -1,20 +1,22 @@
-import pkg from './package.json'
 import babel from 'rollup-plugin-babel'
 import nodeResolve from 'rollup-plugin-node-resolve'
 import vue from 'rollup-plugin-vue'
-import serve from 'rollup-plugin-serve'
+import htmlTemplate from 'rollup-plugin-generate-html-template'
+import replace from 'rollup-plugin-replace'
 
 export default {
   input: './src/main.js',
-  output: {
-    name: 'sample',
-    file: pkg.browser,
-    format: 'umd',
-    plugins: [
-      babel(),
-      nodeResolve({ mainFields: ['module', 'main'] }),
-      vue(),
-      serve()
-    ]
-  }
+  output: { file: 'dist/devbundle.js', format: 'iife' },
+  plugins: [
+    babel(),
+    nodeResolve({ mainFields: ['module', 'main'] }),
+    replace({
+      'process.env.NODE_ENV': process.env.NODE_ENV
+    }),
+    vue(),
+    htmlTemplate({
+      template: 'public/index.html',
+      target: 'dist/index.html'
+    })
+  ]
 }

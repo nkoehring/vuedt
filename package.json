@@ -6,6 +6,7 @@
   "main": "dist/vuedt.umd.js",
   "module": "dist/vuedt.esm.js",
   "browser": "dist/vuedt.umd.min.js",
+  "unpkg": "dist/vuedt.umd.min.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nkoehring/vuedt.git"
@@ -25,7 +26,7 @@
     "eyecandy"
   ],
   "scripts": {
-    "dev": "rollup -c rollup.config.dev.js -w & serve sample",
+    "dev": "rollup -c rollup.config.dev.js -w & serve dist",
     "build": "rollup -c"
   },
   "dependencies": {
@@ -39,8 +40,10 @@
     "rollup-plugin-analyzer": "^3.2.2",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-filesize": "^9.0.0",
+    "rollup-plugin-generate-html-template": "^1.6.1",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-postcss": "^3.1.1",
+    "rollup-plugin-replace": "^2.2.0",
     "rollup-plugin-serve": "^1.0.1",
     "rollup-plugin-terser": "^5.3.0",
     "rollup-plugin-vue": "^5.1.7",
